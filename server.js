@@ -3,7 +3,16 @@ const admin = require("firebase-admin");
 const cors = require("cors");
 
 // 🔐 Firebase service account
-const serviceAccount = require("./chat-app-468fa-firebase-adminsdk-fbsvc-ffb5e5cda2.json");
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  }),
+});
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -14,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 
 // Health check
-app.get("/", (req, res) => {
+app.get("/get", (req, res) => {
   res.json({ status: "FCM Server Running" });
 });
 
