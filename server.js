@@ -2,8 +2,6 @@ const express = require("express");
 const admin = require("firebase-admin");
 const cors = require("cors");
 
-// 🔐 Firebase service account
-const admin = require("firebase-admin");
 
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -13,10 +11,6 @@ admin.initializeApp({
   }),
 });
 
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
 
 const app = express();
 app.use(cors());
