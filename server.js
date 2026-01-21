@@ -3,6 +3,7 @@ const admin = require("firebase-admin");
 const cors = require("cors");
 
 
+
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
@@ -23,7 +24,7 @@ app.get("/get", (req, res) => {
 
 // 🔔 Send Push Notification
 app.post("/send", async (req, res) => {
-  const { title, body, token, data } = req.body;
+  const { title, body, token } = req.body;
 
   if (!title || !body || !token) {
     return res.status(400).json({
@@ -37,7 +38,7 @@ app.post("/send", async (req, res) => {
       title: title,
       body: body,
     },
-    data: data || {},
+    
     android: {
       priority: "high",
     },
